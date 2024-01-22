@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTM AcademicBot</title>
+<link href="dashStyles.css" rel="stylesheet">
+ <script src="auth.js" type="module"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<script type="module" src="dashboard.js" defer></script>
+</head>
+<body>
+
+<div class="navbar">
+  
+    <img class="webLogo" src="logo.svg" alt="AcademicBot logo" id="logo">
+    <div class="profile" id="userProfile">
+      <span id="userEmail"></span>
+      <!--<img src="" alt="Profile Picture" id="userProfilePicture">-->
+      <div class="logout" id="logout">
+        <a href ="index.html"><button class="btn">Logout  <i class="fas fa-sign-out-alt"></i></button> </i></a>
+        
+      </div>
+    </div>
+  
+</div>
+
+<div class="sidebar">
+  <ul class="sidebar-menu">
+    <li><a href="dashboard.html"><i class="fas fa-home"></i><span class="menu-text"> Home</span></a></li>
+    <li><a href="forms.html"><i class="fas fa-question-circle"></i><span class="menu-text"> Form</span></a></li>
+    <li><a href="#"><i class="fas fa-envelope"></i><span class="menu-text"> Contact</span></a></li>
+    <!-- Add other menu items as needed -->
+  </ul>
+</div>
+
+<div class="main-content">
+  <div class="faq-title">FREQUENTLY ASKED QUESTIONS</div>
+  <div id="faq-list">
+    <!-- FAQs will be populated here by JavaScript -->
+  </div>
+
+  <!-- Botpress Chatbot -->
+  <div class="chatbot-placeholder">
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/bad39a73-4cc9-478d-8b9d-0ef0087da670/webchat/config.js" defer></script>
+  </div>
+</div>
+
+<div class="footer">
+  <p>University of Technologi Malaysia</p>
+</div>
+
+<script>
+
+const faqs = [
+  { question: 'How do I register for courses for the upcoming semester?', answer: 'You can register from UTM portal my.utm.my' },
+  { question: 'Where do i renew my student visa?', answer: 'To renew your Student Visa please go to UTM International at S19' },
+  { question: 'Where do I get my matric card?', answer: 'Your matric is with ISC at UTM international' },
+  { question: 'How much Attendance do I need to attend exams?', answer: 'You need aatleast 80% attendance to qualify for attending the final examination' },
+];
+
+// Function to toggle FAQ answer
+function toggleFAQAnswer(faqIndex) {
+  const answerDiv = document.getElementById(`faq-answer-${faqIndex}`);
+  answerDiv.style.display = answerDiv.style.display === 'block' ? 'none' : 'block';
+}
+
+// Function to render FAQs
+function renderFAQs() {
+  const faqList = document.getElementById('faq-list');
+  faqs.forEach((faq, index) => {
+    faqList.innerHTML += `
+      <div class="faq-item" onclick="toggleFAQAnswer(${index})">
+        <h3>${faq.question}</h3>
+        <div class="faq-answer" id="faq-answer-${index}">${faq.answer}</div>
+      </div>
+    `;
+  });
+}
+
+// Call renderFAQs on page load
+window.onload = renderFAQs;
+</script>
+
+</body>
+</html>
